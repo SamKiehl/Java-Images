@@ -18,24 +18,6 @@ public class EditorWindow{
 
     private static TextField percent = new TextField();
 
-    private static ActionListener[] actions = {
-        new SetPixel(),
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    };
-
     public static void main (String[] args){  
             ie = null;
 
