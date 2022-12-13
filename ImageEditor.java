@@ -221,6 +221,42 @@ public class ImageEditor{
 
     public void mirror3(){ mirror(3); }
 
+    public void removeRed(){
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                int[] rgb = getRGBArr(i, j);
+                int g2 = rgb[2];
+                int b2 = rgb[3];
+
+                setPixel(i, j, rgb[0], 0, g2, b2);
+            }
+        }
+    }
+
+    public void removeGreen(){
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                int[] rgb = getRGBArr(i, j);
+                int r2 = rgb[1];
+                int b2 = rgb[3];
+
+                setPixel(i, j, rgb[0], r2, 0, b2);
+            }
+        }
+    }
+
+    public void removeBlue(){
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                int[] rgb = getRGBArr(i, j);
+                int r2 = rgb[1];
+                int g2 = rgb[2];
+
+                setPixel(i, j, rgb[0], r2, g2, 0);
+            }
+        }
+    }
+
     public File save(){
         try{
             f = new File("./Output Images/" + name.substring(0, name.indexOf(".")) + "(edit)" + name.substring(name.indexOf(".")));
@@ -239,9 +275,7 @@ public class ImageEditor{
             ImageIO.write(img, "png", f);
             img.flush();
             return f;
-        }catch(IOException e){
-            System.out.println(e);
-        }
+        }catch(IOException e){ e.printStackTrace(); }
         return null;
     }
 }

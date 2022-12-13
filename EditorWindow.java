@@ -92,6 +92,18 @@ public class EditorWindow{
             panel.add(mirror3);
             mirror3.addActionListener(new Mirror3());
 
+            JButton removeRed = new JButton("Remove Red");
+            panel.add(removeRed);
+            removeRed.addActionListener(new RemoveRed());
+
+            JButton removeGreen = new JButton("Remove Green");
+            panel.add(removeGreen);
+            removeGreen.addActionListener(new RemoveGreen());
+
+            JButton removeBlue = new JButton("Remove Blue");
+            panel.add(removeBlue);
+            removeBlue.addActionListener(new RemoveBlue());
+
             JButton save = new JButton("Save Image");
             panel.add(save);
             save.addActionListener(new Save());
@@ -175,7 +187,7 @@ public class EditorWindow{
         public void actionPerformed(ActionEvent e){
             JFrame sp = new JFrame("Set Pixel");
             sp.setVisible(true);
-            sp.setSize(300, 40);
+            sp.setSize(300, 100);
             JLabel label = new JLabel("Choose Coordinates");
             JPanel p = new JPanel();
 
@@ -250,7 +262,7 @@ public class EditorWindow{
         public void actionPerformed(ActionEvent e){
             JFrame ab = new JFrame("Adjust Brightness");
             ab.setVisible(true);
-            ab.setSize(300, 40);
+            ab.setSize(300, 90);
             JLabel label = new JLabel("Choose Adjustment %");
             JPanel p = new JPanel();
 
@@ -360,9 +372,32 @@ public class EditorWindow{
         }
     }
 
+    static class RemoveRed implements ActionListener {
+        public void actionPerformed(ActionEvent ee){
+            ie.removeRed();
+            ie.save("./Temp/" + ie.getName().substring(0, ie.getName().indexOf(".")) + "(edit)" + ie.getName().substring(ie.getName().indexOf(".")));
+            addImage();
+        }
+    }
+
+    static class RemoveGreen implements ActionListener {
+        public void actionPerformed(ActionEvent ee){
+            ie.removeGreen();
+            ie.save("./Temp/" + ie.getName().substring(0, ie.getName().indexOf(".")) + "(edit)" + ie.getName().substring(ie.getName().indexOf(".")));
+            addImage();
+        }
+    }
+
+    static class RemoveBlue implements ActionListener {
+        public void actionPerformed(ActionEvent ee){
+            ie.removeBlue();
+            ie.save("./Temp/" + ie.getName().substring(0, ie.getName().indexOf(".")) + "(edit)" + ie.getName().substring(ie.getName().indexOf(".")));
+            addImage();
+        }
+    }
+
     static class Save implements ActionListener {
         public void actionPerformed(ActionEvent ee){
-            ie.mirror0();
             ie.save("./Temp/" + ie.getName().substring(0, ie.getName().indexOf(".")) + "(edit)" + ie.getName().substring(ie.getName().indexOf(".")));
             ie.save();
             System.out.println("Saving: " + ie.getAbsolutePath());
