@@ -18,28 +18,6 @@ public class ImageEditor{
     public String getName(){ return name; }
     public String getAbsolutePath(){ return f.getAbsolutePath(); }
 
-    public void main(String args[])throws IOException{
-        // deepfry();
-        // generalize();
-        // generalizeRGB();
-        // reverseContrast();
-        // grayscale();
-        // flipH();
-        // flipV();
-        // adjustBrightness(275);
-        // blackAndWhite();
-        // mirror0();
-        // mirror1();
-        // mirror2();
-        // mirror3();
-        // reverseContrast();
-        // deepfry();
-        // mirror0();
-        // mirror0();
-
-        save();
-    }
-
     public ImageEditor(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter Image Filepath (include file extension): ");
