@@ -9,6 +9,7 @@ public class EditorWindow{
     private static JFrame imageWindow;
     private static JFrame frame;
     private static JPanel panel;
+    private static File chosenFile = null;
     private static TextField sx = new TextField();
     private static TextField sy = new TextField();
     private static TextField sa = new TextField();
@@ -35,6 +36,10 @@ public class EditorWindow{
             JButton openButton = new JButton("Browse Files");
             panel.add(openButton);
             openButton.addActionListener (new Browse()); 
+
+            JButton revertChanges = new JButton("Revert Changes");
+            panel.add(revertChanges);
+            revertChanges.addActionListener (new RevertChanges()); 
 
             JButton setPixel = new JButton("Set Pixel");
             panel.add(setPixel);
@@ -108,6 +113,8 @@ public class EditorWindow{
             panel.add(save);
             save.addActionListener(new Save());
 
+            frame.setSize(1279,720);
+            frame.setSize(1280,720);
     }
     
     static class Browse implements ActionListener {        
@@ -118,7 +125,8 @@ public class EditorWindow{
             int returnVal = fc.showOpenDialog(null);
     
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                ie = new ImageEditor(fc.getSelectedFile());
+                chosenFile = fc.getSelectedFile();
+                ie = new ImageEditor(chosenFile);
                 imageWindow = new JFrame(ie.getAbsolutePath());
                 im = new JLabel();
                 //This is where a real application would open the file.
@@ -128,6 +136,22 @@ public class EditorWindow{
                 System.out.println("Open command cancelled by user."/* + newline*/);
             }
         }
+    }
+
+    static class RevertChanges implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            try{
+                ie = new ImageEditor(chosenFile);
+                imageWindow.setVisible(false);
+                imageWindow = null;
+                imageWindow = new JFrame(ie.getAbsolutePath());
+                im = new JLabel();
+                //This is where a real application would open the file.
+                System.out.println("Reverted to: " + chosenFile.getName() + "."/* + newline*/);
+                ie.save("./Temp/" + ie.getName().substring(0, ie.getName().indexOf(".")) + "(edit)" + ie.getName().substring(ie.getName().indexOf(".")));
+                addImage();
+            }catch (Exception ee){System.out.println("An error occured while trying to revert changes.");}
+        } 
     }
 
     public static void addImage(){ 
